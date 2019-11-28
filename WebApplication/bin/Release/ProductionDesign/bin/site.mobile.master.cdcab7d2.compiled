@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Site.Mobile.Master" hash="a144d5752" filehash="c7c716ad4aef45cc" flags="110000" assembly="App_Web_2lphvmkn" type="ASP.site_mobile_master">
+    <filedeps>
+        <filedep name="/Site.Mobile.Master" />
+        <filedep name="/ViewSwitcher.ascx" />
+    </filedeps>
+</preserve>
