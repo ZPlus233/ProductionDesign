@@ -102,6 +102,19 @@ namespace WebApplication
             getTable(name);
         }
 
+        protected void Button11_Click(object sender, EventArgs e)
+        {
+            dic = new Dictionary<string, List<TableRow>>();
+            Table1.Visible = true;
+            Table3.Visible = true;
+            Table2.Visible = false;
+            Table4.Visible = false;
+            Table5.Visible = false;
+            resultShow.Visible = false;
+            string name = "7各机器预计工作时长模板";
+            getTable(name);
+        }
+
         protected void Button7_Click(object sender, EventArgs e)
         {
             dic = new Dictionary<string, List<TableRow>>();
@@ -176,35 +189,6 @@ namespace WebApplication
         }
 
         /// <summary>
-        /// 预览
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void Button11_Click(object sender, EventArgs e)
-        {
-            Table1.Visible = true;
-            Table3.Visible = true;
-            Table2.Visible = false;
-            Table4.Visible = false;
-            Table5.Visible = false;
-            resultShow.Visible = false;
-            string path = FileUpload1.PostedFile.FileName;
-
-            if (path == null || path.Equals(""))
-            {
-                ScriptManager.RegisterStartupScript(Page, GetType(), "onekey",
-                    "alert('请选择文件！')", true);
-                Table1.Rows.AddRange(dic["Table1"].ToArray());
-                return;
-            }
-
-            Table1.Rows.AddRange(dic["Table1"].ToArray());
-            getTableFromPath(System.AppDomain.CurrentDomain.BaseDirectory+"/Upload/" + path);
-            Table4.Visible = true;
-            Button12.Visible = true;
-        }
-
-        /// <summary>
         /// 确定
         /// </summary>
         /// <param name="sender"></param>
@@ -212,6 +196,23 @@ namespace WebApplication
         protected void Button12_Click(object sender, EventArgs e)
         {
             string filename = FileUpload1.PostedFile.FileName;
+
+            string name = Table1.Caption +"模板";
+
+            if (filename.Length <= 0)
+            {
+                ScriptManager.RegisterStartupScript(Page, GetType(), "onekey",
+                        "alert('请选择文件')", true);
+
+                Table1.Visible = true;
+                Table3.Visible = true;
+                Table2.Visible = false;
+                Table4.Visible = false;
+                Table5.Visible = false;
+                resultShow.Visible = false;
+                getTable(name);
+                return;
+            }
             int index = filename.IndexOf("(");
             if (index != -1)
             {

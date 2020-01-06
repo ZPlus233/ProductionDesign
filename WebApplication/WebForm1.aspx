@@ -29,6 +29,7 @@
                     <asp:Button ID="Button4" runat="server" Text="4机器生产参数配置" style="display:none;margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button4_Click" class="btn btn-info btn-lg" Width="24em" /><br/>
                     <asp:Button ID="Button5" runat="server" Text="5产品干湿重g_m配置" style="display:none;margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button5_Click"  class="btn btn-info btn-lg" Width="24em" /><br />
                     <asp:Button ID="Button6" runat="server" Text="6各工序切换产品所需时间"  style="display:none;margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button6_Click"  class="btn btn-info btn-lg" Width="24em" /><br/>
+                    <asp:Button ID="Button11" runat="server" Text="7各机器预计工作时长"  style="display:none;margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button11_Click"  class="btn btn-info btn-lg" Width="24em" /><br/>
                     <asp:Button ID="Button8" runat="server" Text="算法参数配置" style="display:none;margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button8_Click"  class="btn btn-info btn-lg" Width="24em" /><br/>
                     <br/>
                 </div>
@@ -134,10 +135,10 @@
         $("#labelParameterSet").click(function () {
             var labeltext = this.innerText;
             if (labeltext == "参数设置展开") {
-                $("#Button1").show();$("#Button2").show(); $("#Button3").show(); $("#Button4").show(); $("#Button5").show(); $("#Button6").show(); $("#Button8").show();
+                $("#Button1").show(); $("#Button2").show(); $("#Button3").show(); $("#Button4").show(); $("#Button5").show(); $("#Button6").show(); $("#Button11").show(); $("#Button8").show();
                 this.innerText = "参数设置收起";
             } else if (labeltext == "参数设置收起") {
-                $("#Button1").hide();$("#Button2").hide(); $("#Button3").hide(); $("#Button4").hide(); $("#Button5").hide(); $("#Button6").hide(); $("#Button8").hide();
+                $("#Button1").hide(); $("#Button2").hide(); $("#Button3").hide(); $("#Button4").hide(); $("#Button5").hide(); $("#Button6").hide(); $("#Button11").hide(); $("#Button8").hide();
                 this.innerText = "参数设置展开";
             }
         })
