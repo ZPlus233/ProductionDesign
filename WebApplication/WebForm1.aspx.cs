@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using WebApplication.BasicClasses;
 using WebApplication.GA;
 using WebApplication.GA.GA;
+using WebApplication.NewMethod;
 
 namespace WebApplication
 {
@@ -295,7 +296,8 @@ namespace WebApplication
             Table5.Visible = true;
             resultShow.Visible = false;
 
-            string outMessage = GAMainDeal.GA();
+            //string outMessage = GAMainDeal.GA();
+            string outMessage = NewTest.New();
             ScriptManager.RegisterStartupScript(Page, GetType(), "onekey",
                     "alert('排产结束！')", true);
             resultShow.Text = outMessage;

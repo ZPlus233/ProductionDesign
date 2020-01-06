@@ -239,6 +239,8 @@
     <Compile Include="BasicClasses\Products\Striptoroll.cs" />
     <Compile Include="BasicClasses\Textile.cs" />
     <Compile Include="BasicClasses\Util.cs" />
+    <Compile Include="GA\CommonClass\AlgorithmCommon.cs" />
+    <Compile Include="GA\CommonClass\GA\Machines.cs" />
     <Compile Include="GA\CommonClass\GA\Population.cs" />
     <Compile Include="GA\CommonClass\Produce\Machine.cs" />
     <Compile Include="GA\CommonClass\Produce\Order.cs" />
@@ -251,6 +253,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="MainDeal.cs" />
+    <Compile Include="NewMethod\NewTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
 using WebApplication.GA.CommonClass.Produce;
-using WebApplication.GA.GA;
 
 namespace WebApplication.GA.CommonClass.GA
 {
+    [Serializable]
     class Population
     {
         List<GenePart> gene;
         double cost;
+        int changeTimes;
         bool isReasonable;
         List<List<double>> randomLine;
 
@@ -18,6 +19,8 @@ namespace WebApplication.GA.CommonClass.GA
         /// 代价函数
         /// </summary>
         public double Cost { get => cost; set => cost = value; }
+
+        public int ChangeTimes { get => changeTimes; set => changeTimes = value; }
         /// <summary>
         /// 是否合理
         /// </summary>
@@ -40,8 +43,9 @@ namespace WebApplication.GA.CommonClass.GA
                 List<string> l = line.Select(o => o + "").ToList();
                 re.Append("<b>生产线" + (randomLine.IndexOf(line) + 1) + "：</b>" + join(l));
             }
-            re.Append("<br/>遗传算法参数：遗传进化迭代次数：" + GeneticAlgorithm.M + ";种群规模：" + GeneticAlgorithm.N + ";变异概率：" + GeneticAlgorithm.Pm + "<br/>");
+            //re.Append("<br/>遗传算法参数：遗传进化迭代次数：" + GeneticAlgorithm.M + ";种群规模：" + GeneticAlgorithm.N + ";变异概率：" + GeneticAlgorithm.Pm + "<br/>");
             re.Append("<b>最短天数：" + Math.Round(cost/60/24, 2) + "天</b><br/><br/>");
+            re.Append("<b>细纱机切换次数：" + changeTimes + "</b><br/><br/>");
             DateTime now = DateTime.Now;
             foreach (GenePart g in gene)
             {
@@ -57,6 +61,7 @@ namespace WebApplication.GA.CommonClass.GA
                 re.Append(join(begin));
                 re.Append("<b>各工序结束时间：</b><br/>" );
                 re.Append(join(end));
+                re.Append("<b>细纱机选择：" + string.Join(" ", g.SpinnerSelect.OrderBy(o => o))+ "</b><br/>");
                 re.Append("各工序输入次数（输入次数*生产线该工序设备台数*输入端口 = 总输入数目）：" + "<br/>");
                 re.Append(join(input));
                 re.Append("各工序输出次数（输出次数*生产线该工序设备台数*输出端口 = 总输出数目）：" + "<br/>");
@@ -69,7 +74,7 @@ namespace WebApplication.GA.CommonClass.GA
         public string join(List<string> L)
         {
             StringBuilder re = new StringBuilder();
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < L.Count(); i++)
                 re.Append(ToolUtil.machineMessageDict[1].MachineNames[i] + ":" + L[i] + "  ");
             return re.Append("<br/>")+"";
         }
@@ -78,14 +83,14 @@ namespace WebApplication.GA.CommonClass.GA
     /// <summary>
     /// 基因片段
     /// </summary>
+    [Serializable]
     class GenePart
     {
         int id;
         int lineSelect;
         ProduceMessage message;
-        bool isTwoTypes;
-        int roveNum;
-        int yarnNum;
+        List<int> spinnerSelect;
+        int changeTime;
 
         /// <summary>
         /// batch id
@@ -100,19 +105,16 @@ namespace WebApplication.GA.CommonClass.GA
         /// </summary>
         public ProduceMessage Message { get => message; set => message = value; }
         /// <summary>
-        /// 是否为两种同时生产
+        /// 选取了哪几台细纱机
         /// </summary>
-        public bool IsTwoTypes { get => isTwoTypes; set => isTwoTypes = value; }
+        public List<int> SpinnerSelect { get => spinnerSelect; set => spinnerSelect = value; }
         /// <summary>
-        /// 粗纱机数目
+        /// 批次切换次数
         /// </summary>
-        public int RoveNum { get => roveNum; set => roveNum = value; }
-        /// <summary>
-        /// 细纱机数目
-        /// </summary>
-        public int YarnNum { get => yarnNum; set => yarnNum = value; }
+        public int ChangeTime { get => changeTime; set => changeTime = value; }
     }
 
+    [Serializable]
     class ProduceMessage
     {
         List<double> beginTime;

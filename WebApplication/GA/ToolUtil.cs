@@ -411,7 +411,7 @@ namespace WebApplication.GA
                 }
             }
             //优先级按照：1、时间优先；2、时间相同的情况下，小订单优先;3、按品种序号排序（1、2相似；3、4相似）
-            batches = batches.OrderBy(o => o.BatchDetail.Id).OrderBy(o => o.BatchDetail.Weight).OrderBy(o => o.BatchDetail.Deadline).ToList();
+            //batches = batches.OrderBy(o => o.BatchDetail.Id).OrderBy(o => o.BatchDetail.Weight).OrderBy(o => o.BatchDetail.Deadline).ToList();
             return batches;
         }
 
