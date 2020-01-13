@@ -59,7 +59,7 @@ namespace WebApplication
             Table4.Visible = false;
             Table5.Visible = false;
             resultShow.Visible = false;
-            string name = "3各工序制成率_设备运转率_设备运行时间表模板";
+            string name = "3各工序制成率_设备运转率表模板";
             getTable(name);
         }
 

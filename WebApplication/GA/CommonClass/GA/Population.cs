@@ -59,9 +59,16 @@ namespace WebApplication.GA.CommonClass.GA
                     + "; 产品完成时间：" + b[g.Id].BatchDetail.Deadline.ToShortDateString() + "<br/>");
                 re.Append("<b>各工序开始时间：</b><br/>");
                 re.Append(join(begin));
-                re.Append("<b>各工序结束时间：</b><br/>" );
+                re.Append("<b>各工序结束时间：</b><br/>");
                 re.Append(join(end));
-                re.Append("<b>细纱机选择：" + string.Join(" ", g.SpinnerSelect.OrderBy(o => o))+ "</b><br/>");
+                //细纱机从1开始编号
+                List<int> tmp = g.SpinnerSelect.OrderBy(o => o).ToList();
+                for(int i=0; i<tmp.Count; i++)
+                {
+                    tmp[i]++;
+                }
+                re.Append("<b>细纱机选择：" + string.Join(" ", tmp.OrderBy(o =>o)) + "</b><br/>");
+                //re.Append("<b>细纱机选择：" + string.Join(" ", g.SpinnerSelect.OrderBy(o => o)) + "</b><br/>");这样细纱机会从0开始编号
                 re.Append("各工序输入次数（输入次数*生产线该工序设备台数*输入端口 = 总输入数目）：" + "<br/>");
                 re.Append(join(input));
                 re.Append("各工序输出次数（输出次数*生产线该工序设备台数*输出端口 = 总输出数目）：" + "<br/>");

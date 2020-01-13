@@ -65,7 +65,7 @@ namespace WebApplication.NewMethod
                 p.Cost = p.Gene.OrderByDescending(o => o.Message.EndTime.Last()).First().Message.EndTime.Last();
                 message = p.toString(b);
             }
-            catch { }
+            catch { message ="出现异常，请确认所有信息填写格式正确";}
             return message;
         }
 

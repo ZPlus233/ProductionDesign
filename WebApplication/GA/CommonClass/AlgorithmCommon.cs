@@ -6,7 +6,6 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using WebApplication.BasicClasses;
 using WebApplication.GA.CommonClass.GA;
-using WebApplication.GA.CommonClass.Produce;
 using Machine = WebApplication.GA.CommonClass.GA.Machine;
 
 namespace WebApplication.GA
@@ -187,6 +186,7 @@ namespace WebApplication.GA
         public List<List<double>> getRandomProduceLine()
         {
             List<List<double>> randomLine = new List<List<double>>();
+            List<List<double>> nowConditionList = ToolUtil.getNowConditions();
             DataSet dataSet_1 = Util.ExcelToDS(MainDeal.path + "2生产线配置表模板.xls", 1);
             int rowlength = dataSet_1.Tables[0].Rows.Count;
             for (int i = 0; i < rowlength; i++)
@@ -203,6 +203,10 @@ namespace WebApplication.GA
             MSpinnerNum = Convert.ToInt32(dataSet_2.Tables[0].Rows[0].ItemArray[7]);
 
             produceLineMessage = new Machine[randomLine.Count, 6];
+
+            int[,] startmnum = new int[3, 6] { {0,0,0,0,0,0 },
+                {12,4,2,12,5,5},
+                {22,6,3,19,7,7 } };
             for (int i = 0; i < randomLine.Count; i++)
             {
                 for (int j = 0; j < 6; j++)
@@ -218,7 +222,18 @@ namespace WebApplication.GA
                         },
                         //ChangeTimes = 0
                     };
-
+                    //找到该生产线上的该工序机器中最长的预计时间
+                    double maxtime = 0;
+                    //获得该生产线中该工序机器数量
+                    double mnum = randomLine[i][j];
+                    //获得该生产线中机器在总的机器中的序号
+                    for (int k = startmnum[i, j]; k < startmnum[i, j] + mnum; k++)
+                    {
+                        //获得机器序号后，得到其预计还需生产时间；经过不断比较，得到该生产线上该工序最多还应当生产多久
+                        if (nowConditionList[j][k] > maxtime)
+                            maxtime = nowConditionList[j][k];
+                    }
+                    temp.Param.EndTime += maxtime;
                     produceLineMessage[i, j] = temp;
                 }
             }
@@ -237,7 +252,7 @@ namespace WebApplication.GA
                     },
                     //ChangeTimes = 0
                 };
-
+                temp.Param.EndTime += nowConditionList[6][i];
                 spinnerCurrentMessage[i] = temp;
             }
             return randomLine;

@@ -219,7 +219,7 @@ namespace WebApplication.GA
             DataSet dataSet_1 = BasicClasses.Util.ExcelToDS(MainDeal.path + "1工厂机器数量配置表模板.xls", 0);
             List<int> MachineNum = new List<int>();
             for (int i = 1; i <= 7; i++)
-                MachineNum.Add((int)(double)dataSet.Tables[0].Rows[1].ItemArray[i]);
+                MachineNum.Add((int)(double)dataSet_1.Tables[0].Rows[1].ItemArray[i]);
 
 
             machineMessageDict = new Dictionary<int, MachineMessage>();
@@ -247,12 +247,29 @@ namespace WebApplication.GA
                     temp.OutputSpeed.Add((double)dataSet.Tables[0].Rows[8 * (i - 1) + ii].ItemArray[2]);
                     temp.InputPortAmount.Add((int)(double)dataSet.Tables[0].Rows[8 * (i - 1) + ii].ItemArray[3]);
                     temp.OutputPortAmount.Add((int)(double)dataSet.Tables[0].Rows[8 * (i - 1) + ii].ItemArray[4]);
-                    temp.InPrepareTime.Add((double)dataSet.Tables[0].Rows[8 * (i - 1) + ii].ItemArray[6]);
-                    temp.OutRemoveTime.Add((double)dataSet.Tables[0].Rows[8 * (i - 1) + ii].ItemArray[7]);
+                    temp.InPrepareTime.Add((double)dataSet.Tables[0].Rows[8 * (i - 1) + ii].ItemArray[5]);
+                    temp.OutRemoveTime.Add((double)dataSet.Tables[0].Rows[8 * (i - 1) + ii].ItemArray[6]);
+                    //单位产品产出时间
+                    //if (ii == 6)
+                    //{
+                    //    //7.一锭线速度 = 前罗拉转速 * 3.14 * 罗拉直径 * 60 * 0.001 m / h
+                    //    //罗拉直径：粗纱 = 32 ，细纱 = 27
+                    //    double tmpspeed = temp.OutputSpeed.Last() * 3.14 * 32 * 60 * 0.001;
+                    //    temp.Unitouttime.Add(temp.OutputLength.Last() / tmpspeed);
+                    //}
+                    //else if (ii == 7)
+                    //{
+                    //    //7.一锭线速度 = 前罗拉转速 * 3.14 * 罗拉直径 * 60 * 0.001 m / h
+                    //    //罗拉直径：粗纱 = 32 ，细纱 = 27
+                    //    double tmpspeed = temp.OutputSpeed.Last() * 3.14 * 27 * 60 * 0.001;
+                    //    temp.Unitouttime.Add(temp.OutputLength.Last() / tmpspeed);
+                    //}
+                    //else
+                    //{
                     temp.Unitouttime.Add(temp.OutputLength.Last() / temp.OutputSpeed.Last());
+                    //}
                 }
                 //temp.MachineSelectLimits = MachineSelectLimit;
-
                 machineMessageDict.Add(i, temp);
             }
         }
@@ -452,5 +469,161 @@ namespace WebApplication.GA
             }
             return orders;
         }
+
+
+        /// <summary>
+        /// 获取当前各机器还需工作时长
+        /// </summary>
+        public static List<List<double>> getNowConditions()
+        {
+            DataSet dataSet = BasicClasses.Util.ExcelToDS(MainDeal.path + "7各机器预计工作时长模板.xls", 1);
+            List<List<double>> nowconditionsList = new List<List<double>>();
+            List<double> list1 = new List<double>();//梳棉机
+            List<double> list2 = new List<double>();//预并
+            List<double> list3 = new List<double>();//条卷
+            List<double> list4 = new List<double>();//精梳
+            List<double> list5 = new List<double>();//末并
+            List<double> list6 = new List<double>();//粗纱
+            List<double> list7 = new List<double>();//细纱
+
+            for (int i = 0; i < 3; i++)
+            {
+                int j;
+                for (j = 1; j <= 12; j++)
+                {
+                    if (i == 0)
+                    {
+                        list1.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
+                    }
+                    else if (i == 1)
+                    {
+                        if (j == 11 || j == 12) continue;
+                        list1.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[3]));
+                    }
+                    else
+                    {
+                        list1.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                    }
+                }
+                for (; j <= 16; j++)
+                {
+                    if (i == 0)
+                    {
+                        list2.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
+                    }
+                    else if (i == 1)
+                    {
+                        if (j >= 15) continue;
+                        list2.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[3]));
+                    }
+                    else
+                    {
+                        if (j >= 15) continue;
+                        list2.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                    }
+                }
+                for(; j <= 18; j++)
+                {
+                    if (i == 0)
+                    {
+                        list3.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
+                    }
+                    else if (i == 1)
+                    {
+                        if (j == 18) continue;
+                        list3.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[3]));
+                    }
+                    else
+                    {
+                        list3.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                    }
+                }
+                for (; j <= 30; j++)
+                {
+                    if (i == 0)
+                    {
+                        list4.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
+                    }
+                    else if (i == 1)
+                    {
+                        if (j >= 26) continue;
+                        list4.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[3]));
+                    }
+                    else
+                    {
+                        if (j == 30) continue;
+                        list4.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                    }
+                }
+                for (; j <= 35; j++)
+                {
+                    if (i == 0)
+                    {
+                        list5.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
+                    }
+                    else if (i == 1)
+                    {
+                        if (j >= 33) continue;
+                        list5.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[3]));
+                    }
+                    else
+                    {
+                        list5.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                    }
+                }
+                for (; j <= 40; j++)
+                {
+                    if (i == 0)
+                    {
+                        list6.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
+                    }
+                    else if (i == 1)
+                    {
+                        if (j >= 38) continue;
+                        list6.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[3]));
+                    }
+                    else
+                    {
+                        list6.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                    }
+                }
+                for (; j <= 70; j++)
+                {
+                    if (i == 0)
+                    {
+                        if (j >= 70) continue;
+                        list7.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
+                    }
+                    else if (i == 1)
+                    {
+                        list7.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[3]));
+                    }
+                    else
+                    {
+                        if (j >= 70) continue;
+                        list7.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                    }
+                }
+            }
+            nowconditionsList.Add(list1);
+            nowconditionsList.Add(list2);
+            nowconditionsList.Add(list3);
+            nowconditionsList.Add(list4); 
+            nowconditionsList.Add(list5);
+            nowconditionsList.Add(list6);
+            nowconditionsList.Add(list7);
+            return nowconditionsList;
+        }
+
+        /// <summary>
+        /// 获取前一道工序产品品种
+        /// </summary>
+        public string getPreProductId(string productId)
+        {
+            string preProductId = "";
+
+            return preProductId;
+        }
+
     }
 }

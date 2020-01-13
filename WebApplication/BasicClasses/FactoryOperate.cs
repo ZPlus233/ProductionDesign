@@ -56,8 +56,8 @@ namespace WebApplication.BasicClasses
                 mBlowingcarding.Inputamount = Convert.ToInt32(dataSet.Tables[0].Rows[i + 1].ItemArray[3]);
                 mBlowingcarding.Outputamount = Convert.ToInt32(dataSet.Tables[0].Rows[i + 1].ItemArray[4]);
                 mBlowingcarding.Unitouttime = mBlowingcarding.Length / mBlowingcarding.Outspeed;
-                mBlowingcarding.Inputpreparetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 1].ItemArray[6]);
-                mBlowingcarding.Outremovetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 1].ItemArray[7]);
+                mBlowingcarding.Inputpreparetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 1].ItemArray[5]);
+                mBlowingcarding.Outremovetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 1].ItemArray[6]);
                 machineGroup.Machines.Add(mBlowingcarding);
                 //预并条机
                 MPredrawing mPredrawing = new MPredrawing("YBT_" + type, "预并条" + type, 2, 0);
@@ -66,8 +66,8 @@ namespace WebApplication.BasicClasses
                 mPredrawing.Inputamount = Convert.ToInt32(dataSet.Tables[0].Rows[i + 2].ItemArray[3]);
                 mPredrawing.Outputamount = Convert.ToInt32(dataSet.Tables[0].Rows[i + 2].ItemArray[4]);
                 mPredrawing.Unitouttime = mPredrawing.Length / mPredrawing.Outspeed;
-                mPredrawing.Inputpreparetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 2].ItemArray[6]);
-                mPredrawing.Outremovetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 2].ItemArray[7]);
+                mPredrawing.Inputpreparetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 2].ItemArray[5]);
+                mPredrawing.Outremovetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 2].ItemArray[6]);
                 machineGroup.Machines.Add(mPredrawing);
                 //条并卷机
                 MStriptoroll mStriptoroll = new MStriptoroll("TBJ_" + type, "条并卷" + type, 3, 0);
@@ -76,8 +76,8 @@ namespace WebApplication.BasicClasses
                 mStriptoroll.Inputamount = Convert.ToInt32(dataSet.Tables[0].Rows[i + 3].ItemArray[3]);
                 mStriptoroll.Outputamount = Convert.ToInt32(dataSet.Tables[0].Rows[i + 3].ItemArray[4]);
                 mStriptoroll.Unitouttime = mStriptoroll.Length / mStriptoroll.Outspeed * mStriptoroll.Outputamount;
-                mStriptoroll.Inputpreparetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 3].ItemArray[6]);
-                mStriptoroll.Outremovetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 3].ItemArray[7]);
+                mStriptoroll.Inputpreparetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 3].ItemArray[5]);
+                mStriptoroll.Outremovetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 3].ItemArray[6]);
                 machineGroup.Machines.Add(mStriptoroll);
                 //精梳机
                 MComber mComber = new MComber("JSJ_" + type, "精梳机" + type, 4, 0);
@@ -86,8 +86,8 @@ namespace WebApplication.BasicClasses
                 mComber.Inputamount = Convert.ToInt32(dataSet.Tables[0].Rows[i + 4].ItemArray[3]);
                 mComber.Outputamount = Convert.ToInt32(dataSet.Tables[0].Rows[i + 4].ItemArray[4]);
                 mComber.Unitouttime = mComber.Length / mComber.Outspeed;
-                mComber.Inputpreparetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 4].ItemArray[6]);
-                mComber.Outremovetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 4].ItemArray[7]);
+                mComber.Inputpreparetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 4].ItemArray[5]);
+                mComber.Outremovetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 4].ItemArray[6]);
                 machineGroup.Machines.Add(mComber);
                 //末并条机
                 MEnddrawing mEnddrawing = new MEnddrawing("MBT_" + type, "末并条" + type, 5, 0);
@@ -96,8 +96,8 @@ namespace WebApplication.BasicClasses
                 mEnddrawing.Inputamount = Convert.ToInt32(dataSet.Tables[0].Rows[i + 5].ItemArray[3]);
                 mEnddrawing.Outputamount = Convert.ToInt32(dataSet.Tables[0].Rows[i + 5].ItemArray[4]);
                 mEnddrawing.Unitouttime = mEnddrawing.Length / mEnddrawing.Outspeed;
-                mEnddrawing.Inputpreparetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 5].ItemArray[6]);
-                mEnddrawing.Outremovetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 5].ItemArray[7]);
+                mEnddrawing.Inputpreparetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 5].ItemArray[5]);
+                mEnddrawing.Outremovetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 5].ItemArray[6]);
                 machineGroup.Machines.Add(mEnddrawing);
                 //粗纱机
                 MBobbiner mBobbiner = new MBobbiner("CSJ_" + type, "粗纱机" + type, 6, 0);
@@ -105,9 +105,9 @@ namespace WebApplication.BasicClasses
                 mBobbiner.Outspeed = Convert.ToDouble(dataSet.Tables[0].Rows[i + 6].ItemArray[2]);
                 mBobbiner.Inputamount = Convert.ToInt32(dataSet.Tables[0].Rows[i + 6].ItemArray[3]);
                 mBobbiner.Outputamount = Convert.ToInt32(dataSet.Tables[0].Rows[i + 6].ItemArray[4]);
-                mBobbiner.Unitouttime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 6].ItemArray[5]);
-                mBobbiner.Inputpreparetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 6].ItemArray[6]);
-                mBobbiner.Outremovetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 6].ItemArray[7]);
+                mBobbiner.Unitouttime = mBobbiner.Length / mBobbiner.Outspeed;
+                mBobbiner.Inputpreparetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 6].ItemArray[5]);
+                mBobbiner.Outremovetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 6].ItemArray[6]);
                 machineGroup.Machines.Add(mBobbiner);
                 //细纱机
                 MSpinner mSpinner = new MSpinner("XSJ_" + type, "细纱机" + type, 7, 0);
@@ -115,9 +115,9 @@ namespace WebApplication.BasicClasses
                 mSpinner.Outspeed = Convert.ToDouble(dataSet.Tables[0].Rows[i + 7].ItemArray[2]);
                 mSpinner.Inputamount = Convert.ToInt32(dataSet.Tables[0].Rows[i + 7].ItemArray[3]);
                 mSpinner.Outputamount = Convert.ToInt32(dataSet.Tables[0].Rows[i + 7].ItemArray[4]);
-                mSpinner.Unitouttime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 7].ItemArray[5]);
-                mSpinner.Inputpreparetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 7].ItemArray[6]);
-                mSpinner.Outremovetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 7].ItemArray[7]);
+                mSpinner.Unitouttime = mSpinner.Length / mSpinner.Outspeed;
+                mSpinner.Inputpreparetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 7].ItemArray[5]);
+                mSpinner.Outremovetime = Convert.ToDouble(dataSet.Tables[0].Rows[i + 7].ItemArray[6]);
                 machineGroup.Machines.Add(mSpinner);
                 machineGroups.Add(machineGroup);
             }
@@ -270,7 +270,7 @@ namespace WebApplication.BasicClasses
         //制成率,设备运转率设备每日运行时间
         public void ProcedureRateInit(double[] yieldrates, double[] runningrates, double[] workinghours)
         {
-            DataSet dataSet = Util.ExcelToDS(MainDeal.path + "3各工序制成率_设备运转率_设备运行时间表模板.xls", 1);
+            DataSet dataSet = Util.ExcelToDS(MainDeal.path + "3各工序制成率_设备运转率表模板.xls", 1);
             for (int i = 0; i < 7; i++)
             {
                 yieldrates[i] = Convert.ToDouble(dataSet.Tables[0].Rows[0].ItemArray[i + 1]);
@@ -281,7 +281,7 @@ namespace WebApplication.BasicClasses
             }
             for (int i = 0; i < 7; i++)
             {
-                workinghours[i] = Convert.ToDouble(dataSet.Tables[0].Rows[2].ItemArray[i + 1]);
+                workinghours[i] = 24;
             }
         }
 
