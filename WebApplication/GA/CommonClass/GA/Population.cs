@@ -69,10 +69,10 @@ namespace WebApplication.GA.CommonClass.GA
                 }
                 re.Append("<b>细纱机选择：" + string.Join(" ", tmp.OrderBy(o =>o)) + "</b><br/>");
                 //re.Append("<b>细纱机选择：" + string.Join(" ", g.SpinnerSelect.OrderBy(o => o)) + "</b><br/>");这样细纱机会从0开始编号
-                re.Append("各工序输入次数（输入次数*生产线该工序设备台数*输入端口 = 总输入数目）：" + "<br/>");
-                re.Append(join(input));
-                re.Append("各工序输出次数（输出次数*生产线该工序设备台数*输出端口 = 总输出数目）：" + "<br/>");
-                re.Append(join(output) + "<br/>");
+                //re.Append("各工序输入次数（输入次数*生产线该工序设备台数*输入端口 = 总输入数目）：" + "<br/>");
+                //re.Append(join(input));
+                //re.Append("各工序输出次数（输出次数*生产线该工序设备台数*输出端口 = 总输出数目）：" + "<br/>");
+                //re.Append(join(output) + "<br/>");
             }
 
             return re+"";

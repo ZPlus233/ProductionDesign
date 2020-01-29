@@ -305,8 +305,8 @@
     <Content Include="UpLoad\5产品干湿重g_m示例.xls" />
     <Content Include="UpLoad\6各工序切换产品所需时间表示例.xls" />
     <Content Include="UpLoad\7订单表示例.xls" />
-    <Content Include="UpLoad\7各机器预计工作时长模板.xls" />
-    <Content Include="UpLoad\7各机器预计工作时长示例.xls" />
+    <Content Include="UpLoad\7当前生产状态配置表模板.xls" />
+    <Content Include="UpLoad\7当前生产状态配置表示例.xls" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

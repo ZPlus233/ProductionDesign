@@ -186,7 +186,10 @@ namespace WebApplication.GA
         public List<List<double>> getRandomProduceLine()
         {
             List<List<double>> randomLine = new List<List<double>>();
-            List<List<double>> nowConditionList = ToolUtil.getNowConditions();
+            List<List<List<double>>> nowConditionList = ToolUtil.getNowConditions();
+            List<List<double>> timeList = nowConditionList[0];
+            List<List<double>> typeList = nowConditionList[1];
+
             DataSet dataSet_1 = Util.ExcelToDS(MainDeal.path + "2生产线配置表模板.xls", 1);
             int rowlength = dataSet_1.Tables[0].Rows.Count;
             for (int i = 0; i < rowlength; i++)
@@ -230,8 +233,9 @@ namespace WebApplication.GA
                     for (int k = startmnum[i, j]; k < startmnum[i, j] + mnum; k++)
                     {
                         //获得机器序号后，得到其预计还需生产时间；经过不断比较，得到该生产线上该工序最多还应当生产多久
-                        if (nowConditionList[j][k] > maxtime)
-                            maxtime = nowConditionList[j][k];
+                        if (timeList[j][k] > maxtime)
+                            maxtime = timeList[j][k];
+                        temp.Param.Type = Convert.ToInt32(typeList[j][k]);
                     }
                     temp.Param.EndTime += maxtime;
                     produceLineMessage[i, j] = temp;
@@ -246,13 +250,14 @@ namespace WebApplication.GA
                     Id = i,
                     Param = new MachineParam
                     {
-                        Type = i / (MSpinnerNum / 4) + 1,
+                        Type = 0,
                         BeginTime = 0,
                         EndTime = 0
                     },
                     //ChangeTimes = 0
                 };
-                temp.Param.EndTime += nowConditionList[6][i];
+                temp.Param.EndTime += timeList[6][i];
+                temp.Param.Type = Convert.ToInt32(typeList[6][i]);
                 spinnerCurrentMessage[i] = temp;
             }
             return randomLine;

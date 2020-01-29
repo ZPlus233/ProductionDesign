@@ -474,11 +474,11 @@ namespace WebApplication.GA
         /// <summary>
         /// 获取当前各机器还需工作时长
         /// </summary>
-        public static List<List<double>> getNowConditions()
+        public static List<List<List<double>>> getNowConditions()
         {
-            DataSet dataSet = BasicClasses.Util.ExcelToDS(MainDeal.path + "7各机器预计工作时长模板.xls", 1);
-            List<List<double>> nowconditionsList = new List<List<double>>();
-            List<double> list1 = new List<double>();//梳棉机
+            DataSet dataSet = BasicClasses.Util.ExcelToDS(MainDeal.path + "7当前生产状态配置表模板.xls", 1);
+            List<List<double>> timeList = new List<List<double>>();
+            List<double> list1 = new List<double>();//梳棉机,梳棉机需要根据特殊处理，表中只有3组数据，分别代表3条生产线上的梳棉机
             List<double> list2 = new List<double>();//预并
             List<double> list3 = new List<double>();//条卷
             List<double> list4 = new List<double>();//精梳
@@ -486,133 +486,174 @@ namespace WebApplication.GA
             List<double> list6 = new List<double>();//粗纱
             List<double> list7 = new List<double>();//细纱
 
-            for (int i = 0; i < 3; i++)
+            List<List<double>> typeList = new List<List<double>>();
+            List<double> tlist1 = new List<double>();//梳棉机,梳棉机需要根据特殊处理，表中只有3组数据，分别代表3条生产线上的梳棉机
+            List<double> tlist2 = new List<double>();//预并
+            List<double> tlist3 = new List<double>();//条卷
+            List<double> tlist4 = new List<double>();//精梳
+            List<double> tlist5 = new List<double>();//末并
+            List<double> tlist6 = new List<double>();//粗纱
+            List<double> tlist7 = new List<double>();//细纱
+
+            for (int i = 0; i < 3; i++)//i代表3组生产线
             {
-                int j;
-                for (j = 1; j <= 12; j++)
+                int j;//j为表中行数
+                for (j = 0; j < 1; j++)
                 {
-                    if (i == 0)
+                    for (int k = 0; k < 12; k++)
                     {
-                        list1.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
-                    }
-                    else if (i == 1)
-                    {
-                        if (j == 11 || j == 12) continue;
-                        list1.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[3]));
-                    }
-                    else
-                    {
-                        list1.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                        if (i == 0)
+                        {
+                            list1.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
+                            tlist1.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[2]));
+                        }
+                        else if (i == 1)
+                        {
+                            if (k == 10 || k == 11) continue;
+                            list1.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[4]));
+                            tlist1.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                        }
+                        else
+                        {
+                            list1.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[7]));
+                            tlist1.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[8]));
+                        }
                     }
                 }
-                for (; j <= 16; j++)
+                for (; j <= 4; j++)
                 {
                     if (i == 0)
                     {
                         list2.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
+                        tlist2.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[2]));
                     }
                     else if (i == 1)
                     {
-                        if (j >= 15) continue;
-                        list2.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[3]));
+                        if (j >= 3) continue;
+                        list2.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[4]));
+                        tlist2.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
                     }
                     else
                     {
-                        if (j >= 15) continue;
-                        list2.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                        if (j >= 3) continue;
+                        list2.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[7]));
+                        tlist2.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[8]));
                     }
                 }
-                for(; j <= 18; j++)
+                for(; j <= 6; j++)
                 {
                     if (i == 0)
                     {
                         list3.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
+                        tlist3.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[2]));
                     }
                     else if (i == 1)
                     {
-                        if (j == 18) continue;
-                        list3.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[3]));
+                        if (j == 6) continue;
+                        list3.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[4]));
+                        tlist3.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
                     }
                     else
                     {
-                        list3.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                        list3.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[7]));
+                        tlist3.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[8]));
                     }
                 }
-                for (; j <= 30; j++)
+                for (; j <= 18; j++)
                 {
                     if (i == 0)
                     {
                         list4.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
+                        tlist4.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[2]));
                     }
                     else if (i == 1)
                     {
-                        if (j >= 26) continue;
-                        list4.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[3]));
+                        if (j >= 14) continue;
+                        list4.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[4]));
+                        tlist4.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
                     }
                     else
                     {
-                        if (j == 30) continue;
-                        list4.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                        if (j == 18) continue;
+                        list4.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[7]));
+                        tlist4.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[8]));
                     }
                 }
-                for (; j <= 35; j++)
+                for (; j <= 23; j++)
                 {
                     if (i == 0)
                     {
                         list5.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
+                        tlist5.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[2]));
                     }
                     else if (i == 1)
                     {
-                        if (j >= 33) continue;
-                        list5.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[3]));
+                        if (j >= 21) continue;
+                        list5.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[4]));
+                        tlist5.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
                     }
                     else
                     {
-                        list5.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                        list5.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[7]));
+                        tlist5.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[8]));
                     }
                 }
-                for (; j <= 40; j++)
+                for (; j <= 28; j++)
                 {
                     if (i == 0)
                     {
                         list6.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
+                        tlist6.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[2]));
                     }
                     else if (i == 1)
                     {
-                        if (j >= 38) continue;
-                        list6.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[3]));
+                        if (j >= 26) continue;
+                        list6.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[4]));
+                        tlist6.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
                     }
                     else
                     {
-                        list6.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                        list6.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[7]));
+                        tlist6.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[8]));
                     }
                 }
-                for (; j <= 70; j++)
+                for (; j <= 58; j++)
                 {
                     if (i == 0)
                     {
-                        if (j >= 70) continue;
+                        if (j >= 58) continue;
                         list7.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[1]));
+                        tlist7.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[2]));
                     }
                     else if (i == 1)
                     {
-                        list7.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[3]));
+                        list7.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[4]));
+                        tlist7.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
                     }
                     else
                     {
-                        if (j >= 70) continue;
-                        list7.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[5]));
+                        if (j >= 58) continue;
+                        list7.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[7]));
+                        tlist7.Add(Convert.ToDouble(dataSet.Tables[0].Rows[j].ItemArray[8]));
                     }
                 }
             }
-            nowconditionsList.Add(list1);
-            nowconditionsList.Add(list2);
-            nowconditionsList.Add(list3);
-            nowconditionsList.Add(list4); 
-            nowconditionsList.Add(list5);
-            nowconditionsList.Add(list6);
-            nowconditionsList.Add(list7);
-            return nowconditionsList;
+            timeList.Add(list1);
+            timeList.Add(list2);
+            timeList.Add(list3);
+            timeList.Add(list4);
+            timeList.Add(list5);
+            timeList.Add(list6);
+            timeList.Add(list7);
+
+            typeList.Add(tlist1);typeList.Add(tlist2);
+            typeList.Add(tlist3); typeList.Add(tlist4); 
+            typeList.Add(tlist5); typeList.Add(tlist6);
+            typeList.Add(tlist7);
+            List<List<List<double>>> l = new List<List<List<double>>>();
+            l.Add(timeList);
+            l.Add(typeList);
+            return l;
         }
 
         /// <summary>

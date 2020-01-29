@@ -11,30 +11,28 @@
     <script src="Scripts/bootstrap.min.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <div style="background: #6699FF; margin: 2px;height:70px;">
+        <label style="font-size: 40px;padding-left: 15px;color: white;margin-top:5px;">智能纺纱排产系统</label>
+    </div>
+    <form id="form1" runat="server" style="margin-top:4px">
         <div class="container" style="width: 100%;">
             <div class="row" >
                 <div class="col-lg-2" >
-                    <div style="width:22.5em;height:70px;background-color:#6699FF;">
-                        <label style="width:inherit;color:white;text-align: center;font-size: 2.5em;margin: 0.2em;">排产</label>
+                    <div style="width:22.5em;height:50px;background-color:#6699FF;">
+                        <label style="width:inherit;color:white;text-align: center;font-size: 2em;margin: 0.2em;">排产</label>
                     </div>
                     <asp:Button ID="Button7" runat="server" Text="订单配置"  Height="60px" OnClick="Button7_Click" style="margin:0.1em;font-size:1.5em;" class="btn btn-info btn-lg" Width="14.9em" /><br/>
+                    <asp:Button ID="Button11" runat="server" Text="当前生产状态配置"  style="margin:0.1em;font-size:1.5em;" Height="60px" OnClick="Button11_Click"  class="btn btn-info btn-lg" Width="14.9em" /><br/>
                     <asp:Button ID="Button9" runat="server" Text="开始排产"  Height="60px" OnClick="Button9_Click" style="margin:0.1em;font-size:1.5em;" class="btn btn-info btn-lg" Width="14.9em" /><br/>
-                    <div style="width:22.5em;height:70px;background-color:#6699FF;">
-                        <label  id="labelParameterSet" style="width:inherit;color:white;text-align: center;font-size: 2.5em;margin: 0.2em;">参数设置展开</label>
+                    <div style="width:22.5em;height:50px;background-color:#6699FF;">
+                        <label  id="labelParameterSet" style="width:inherit;color:white;text-align: center;font-size: 2em;margin: 0.2em;">参数设置</label>
                     </div>
-                    <asp:Button ID="Button3" runat="server" Text="3各工序制成率_设备运转率" style="display:none;margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button3_Click" class="btn btn-info btn-lg" Width="24em" /><br/>
-                    <asp:Button ID="Button4" runat="server" Text="4机器生产参数配置" style="display:none;margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button4_Click" class="btn btn-info btn-lg" Width="24em" /><br/>
-                    <asp:Button ID="Button5" runat="server" Text="5产品干湿重g_m配置" style="display:none;margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button5_Click"  class="btn btn-info btn-lg" Width="24em" /><br />
-                    <asp:Button ID="Button6" runat="server" Text="6各工序切换产品所需时间"  style="display:none;margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button6_Click"  class="btn btn-info btn-lg" Width="24em" /><br/>
-                    <asp:Button ID="Button11" runat="server" Text="7各机器预计工作时长"  style="display:none;margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button11_Click"  class="btn btn-info btn-lg" Width="24em" /><br/>
-                    <asp:Button ID="Button1" runat="server" Text="1工厂机器数量配置" style="display:none;margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button1_Click" class="btn btn-info btn-lg" Width="24em" /><br/>
-                    <asp:Button ID="Button2" runat="server" Text="2生产线配置" style="display:none;margin:0.1em;font-size:0.93em;"  Height="60px" OnClick="Button2_Click" class="btn btn-info btn-lg" Width="24em" /><br/>
-                     <asp:Button ID="Button8" runat="server" Text="算法参数配置" style="display:none;margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button8_Click"  class="btn btn-info btn-lg" Width="24em" /><br/>
-                    <br/>
+                    <asp:Button ID="Button3" runat="server" Text="1各工序制成率_设备运转率" style="margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button3_Click" class="btn btn-info btn-lg" Width="24em" /><br/>
+                    <asp:Button ID="Button4" runat="server" Text="2机器生产参数配置" style="margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button4_Click" class="btn btn-info btn-lg" Width="24em" /><br/>
+                    <asp:Button ID="Button5" runat="server" Text="3产品干湿重g_m配置" style="margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button5_Click"  class="btn btn-info btn-lg" Width="24em" /><br />
+                    <asp:Button ID="Button6" runat="server" Text="4各工序切换产品所需时间"  style="margin:0.1em;font-size:0.93em;" Height="60px" OnClick="Button6_Click"  class="btn btn-info btn-lg" Width="24em" /><br/>
                 </div>
                 <div class="col-lg-8 col-lg-offset-1">
-
                      <div id ="readExcel" style="margin-top:10px;">
                         <asp:Table ID="Table3" runat="server" BackColor="White" BorderColor="Black" BorderStyle="None" BorderWidth="1px" HorizontalAlign="Justify" >
                         <asp:TableRow>
@@ -79,30 +77,6 @@
                             <asp:TextBox ID="Pm" runat="server" TextMode="Number" placeholder="0.5"></asp:TextBox>
                         </asp:TableCell>
                     </asp:TableRow>
-<%--                    <asp:TableRow>
-                        <asp:TableCell>
-                            <asp:Label ID="Label4" runat="server" Text="尝试次数"></asp:Label>
-                        </asp:TableCell>
-                        <asp:TableCell>
-                            <asp:TextBox ID="TN" runat="server" TextMode="Number"></asp:TextBox>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell>
-                            <asp:Label ID="Label5" runat="server" Text="总分数"></asp:Label>
-                        </asp:TableCell>
-                        <asp:TableCell>
-                            <asp:TextBox ID="SP" runat="server" TextMode="Number"></asp:TextBox>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell>
-                            <asp:Label ID="Label6" runat="server" Text="允许试验数"></asp:Label>
-                        </asp:TableCell>
-                        <asp:TableCell>
-                            <asp:TextBox ID="ATN" runat="server" TextMode="Number"></asp:TextBox>
-                        </asp:TableCell>
-                    </asp:TableRow>--%>
                     <asp:TableRow>
                         <asp:TableCell></asp:TableCell>
                         <asp:TableCell HorizontalAlign="Right">
@@ -130,18 +104,5 @@
         </div>
         </div>
     </form>
-
-    <script type="text/javascript">
-        $("#labelParameterSet").click(function () {
-            var labeltext = this.innerText;
-            if (labeltext == "参数设置展开") {
-                $("#Button3").show(); $("#Button4").show(); $("#Button5").show(); $("#Button6").show(); $("#Button11").show(); 
-                this.innerText = "参数设置收起";
-            } else if (labeltext == "参数设置收起") {
-                $("#Button3").hide(); $("#Button4").hide(); $("#Button5").hide(); $("#Button6").hide(); $("#Button11").hide(); 
-                this.innerText = "参数设置展开";
-            }
-        })
-    </script>
 </body>
 </html>

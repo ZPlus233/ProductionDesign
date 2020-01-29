@@ -111,7 +111,7 @@ namespace WebApplication
             Table4.Visible = false;
             Table5.Visible = false;
             resultShow.Visible = false;
-            string name = "7各机器预计工作时长模板";
+            string name = "7当前生产状态配置表模板";
             getTable(name);
         }
 
@@ -126,18 +126,6 @@ namespace WebApplication
             resultShow.Visible = false;
             string name = "7订单表模板";
             getTable(name);
-        }
-
-        protected void Button8_Click(object sender, EventArgs e)
-        {
-            Table1.Visible = false;
-            Table3.Visible = false;
-            Table2.Visible = true;
-            Table4.Visible = false;
-            Table5.Visible = false;
-            resultShow.Visible = false;
-            string name = Button8.Text;
-            Table2.Caption = name;
         }
 
         /// <summary>
